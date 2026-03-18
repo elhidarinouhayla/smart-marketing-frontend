@@ -28,18 +28,23 @@ export default function LoginPage() {
     setError('');
 
     try {
-      const response = await api.post('/auth/login', formData);
+      const response = await api.post('auth/login', formData);
       const { token } = response.data;
-      
-      // Store token (Basic implementation, ideally use cookies/auth context)
       localStorage.setItem('auth_token', token);
-      
-      // Success! Redirect to dashboard
       router.push('/dashboard');
     } catch (err: any) {
       console.error('Login error:', err);
-      // Support detail field from FastAPI or standard error message
-      setError(err.detail || 'The username or password you entered is incorrect.');
+      let errorMsg = 'The username or password you entered is incorrect.';
+      if (err.detail) {
+        errorMsg = typeof err.detail === 'string' 
+          ? err.detail 
+          : Array.isArray(err.detail) 
+            ? err.detail[0]?.msg || JSON.stringify(err.detail)
+            : JSON.stringify(err.detail);
+      } else if (err.message) {
+        errorMsg = err.message;
+      }
+      setError(errorMsg);
     } finally {
       setIsLoading(false);
     }
@@ -106,7 +111,7 @@ export default function LoginPage() {
                   onChange={handleInputChange}
                   required
                   placeholder="marketing_pro"
-                  className="block w-full pl-11 pr-4 py-4 bg-lavender/20 border-2 border-transparent rounded-[1.25rem] font-bold text-brand-dark placeholder:text-lavender/80 focus:outline-none focus:ring-0 focus:border-primary/30 focus:bg-white transition-all"
+                   className="block w-full pl-11 pr-4 py-4 bg-lavender/20 border-2 border-transparent rounded-[1.25rem] font-bold text-primary placeholder:text-brand-gray focus:outline-none focus:ring-0 focus:border-primary/30 focus:bg-white transition-all"
                 />
               </div>
             </div>
@@ -128,7 +133,7 @@ export default function LoginPage() {
                   onChange={handleInputChange}
                   required
                   placeholder="••••••••"
-                  className="block w-full pl-11 pr-12 py-4 bg-lavender/20 border-2 border-transparent rounded-[1.25rem] font-bold text-brand-dark placeholder:text-lavender/80 focus:outline-none focus:ring-0 focus:border-primary/30 focus:bg-white transition-all"
+                  className="block w-full pl-11 pr-12 py-4 bg-lavender/20 border-2 border-transparent rounded-[1.25rem] font-bold text-primary placeholder:text-brand-gray focus:outline-none focus:ring-0 focus:border-primary/30 focus:bg-white transition-all"
                 />
                 <button 
                   type="button"

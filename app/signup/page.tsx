@@ -32,13 +32,24 @@ export default function SignupPage() {
     try {
       await api.post('/auth/register', formData);
       setIsSuccess(true);
-      // Wait a moment then redirect to login
       setTimeout(() => {
         router.push('/login');
       }, 2000);
     } catch (err: any) {
       console.error('Registration error:', err);
-      setError(err.detail || 'An unexpected error occurred during registration. Please try again.');
+      let errorMsg = 'An unexpected error occurred during registration. Please try again.';
+      // Check if err.response.data exists and contains detail
+      if (err.response && err.response.data && err.response.data.detail) {
+        const detail = err.response.data.detail;
+        errorMsg = typeof detail === 'string' 
+          ? detail 
+          : Array.isArray(detail) 
+            ? detail[0]?.msg || JSON.stringify(detail)
+            : JSON.stringify(detail);
+      } else if (err.message) {
+        errorMsg = err.message;
+      }
+      setError(errorMsg);
     } finally {
       setIsLoading(false);
     }
@@ -118,7 +129,7 @@ export default function SignupPage() {
                   onChange={handleInputChange}
                   required
                   placeholder="marketing_pro"
-                  className="block w-full pl-11 pr-4 py-4 bg-lavender/20 border-2 border-transparent rounded-[1.25rem] font-bold text-brand-dark placeholder:text-lavender/80 focus:outline-none focus:ring-0 focus:border-primary/30 focus:bg-white transition-all shadow-sm"
+                  className="block w-full pl-11 pr-4 py-4 bg-lavender/20 border-2 border-transparent rounded-[1.25rem] font-bold text-primary placeholder:text-brand-gray focus:outline-none focus:ring-0 focus:border-primary/30 focus:bg-white transition-all shadow-sm"
                 />
               </div>
             </div>
@@ -137,7 +148,7 @@ export default function SignupPage() {
                   onChange={handleInputChange}
                   required
                   placeholder="name@company.com"
-                  className="block w-full pl-11 pr-4 py-4 bg-lavender/20 border-2 border-transparent rounded-[1.25rem] font-bold text-brand-dark placeholder:text-lavender/80 focus:outline-none focus:ring-0 focus:border-primary/30 focus:bg-white transition-all shadow-sm"
+                  className="block w-full pl-11 pr-4 py-4 bg-lavender/20 border-2 border-transparent rounded-[1.25rem] font-bold text-primary placeholder:text-brand-gray focus:outline-none focus:ring-0 focus:border-primary/30 focus:bg-white transition-all shadow-sm"
                 />
               </div>
             </div>
@@ -156,7 +167,7 @@ export default function SignupPage() {
                   onChange={handleInputChange}
                   required
                   placeholder="••••••••"
-                  className="block w-full pl-11 pr-12 py-4 bg-lavender/20 border-2 border-transparent rounded-[1.25rem] font-bold text-brand-dark placeholder:text-lavender/80 focus:outline-none focus:ring-0 focus:border-primary/30 focus:bg-white transition-all shadow-sm"
+                  className="block w-full pl-11 pr-12 py-4 bg-lavender/20 border-2 border-transparent rounded-[1.25rem] font-bold text-primary placeholder:text-brand-gray focus:outline-none focus:ring-0 focus:border-primary/30 focus:bg-white transition-all shadow-sm"
                 />
                 <button 
                   type="button"

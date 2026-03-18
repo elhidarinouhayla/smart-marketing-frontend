@@ -1,0 +1,98 @@
+.root {
+  background-color: white;
+  padding: 32px;
+  border-radius: 24px;
+  border: 1px solid #ebf0f9;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+.titleArea {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1e1b4b;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.th {
+  text-align: left;
+  padding: 16px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #94a3b8;
+  border-bottom: 2px solid #f8faff;
+  letter-spacing: 0.1em;
+}
+
+.td {
+  padding: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+  border-bottom: 1px solid #f8faff;
+}
+
+.campaignName {
+  font-weight: 800;
+  color: #1e1b4b;
+}
+
+.status {
+  display: inline-flex;
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.statusActive {
+  background-color: #ecfdf5;
+  color: #10b981;
+}
+
+.statusPaused {
+  background-color: #fffbeb;
+  color: #f59e0b;
+}
+
+.statusInactive {
+  background-color: #fef2f2;
+  color: #ef4444;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btnAction {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.btnAction:hover {
+  background-color: #f8fafc;
+  color: #4f46e5;
+}
+
+.btnDelete:hover {
+  color: #ef4444;
+}

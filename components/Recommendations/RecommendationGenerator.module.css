@@ -1,0 +1,79 @@
+.root {
+  background-color: white;
+  padding: 32px;
+  border-radius: 24px;
+  border: 1px solid #ebf0f9;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1e1b4b;
+  margin-bottom: 32px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.input {
+  background-color: #f8fafc;
+  border: 1px solid #ebf0f9;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e1b4b;
+}
+
+.btnSubmit {
+  grid-column: span 3;
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+  color: white;
+  padding: 16px;
+  border-radius: 14px;
+  border: none;
+  font-size: 14px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.resultCard {
+  grid-column: span 3;
+  padding: 32px;
+  background-color: #f5f3ff;
+  border: 1px solid #4f46e5;
+  border-radius: 20px;
+  margin-top: 24px;
+}
+
+.resultTitle {
+  font-size: 16px;
+  font-weight: 900;
+  color: #4f46e5;
+  margin-bottom: 12px;
+}
+
+.advice {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e1b4b;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}

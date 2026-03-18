@@ -1,0 +1,98 @@
+.root {
+  background-color: white;
+  padding: 32px;
+  border-radius: 24px;
+  border: 1px solid #ebf0f9;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1e1b4b;
+  margin-bottom: 32px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #1e1b4b;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.input {
+  background-color: #f8fafc;
+  border: 1px solid #ebf0f9;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e1b4b;
+}
+
+.btnAction {
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: none;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.statCard {
+  background-color: #f8faff;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid #ebf0f9;
+  text-align: center;
+}
+
+.statLabel {
+  font-size: 11px;
+  font-weight: 800;
+  color: #94a3b8;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.statValue {
+  font-size: 18px;
+  font-weight: 900;
+  color: #1e1b4b;
+}
+
+.msg {
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 16px;
+}
+
+.success {
+  background-color: #ecfdf5;
+  color: #065f46;
+}

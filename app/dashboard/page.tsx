@@ -1,52 +1,106 @@
 'use client';
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
+import React, { useEffect, useState } from 'react';
+import Header from '@/components/Dashboard/Header';
+import StatCard from '@/components/Dashboard/StatCard';
+import SectionLineChart from '@/components/Dashboard/SectionLineChart';
+import SectionBarChart from '@/components/Dashboard/SectionBarChart';
+import SectionDonutChart from '@/components/Dashboard/SectionDonutChart';
+import Recommendations from '@/components/Dashboard/Recommendations';
+import api from '@/lib/axios';
+import styles from './Dashboard.module.css';
 
 export default function Dashboard() {
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('auth_token');
-    if (!token) {
-      router.push('/login');
-    } else {
-      setIsLoading(false);
-    }
-  }, [router]);
+    const fetchDashboardData = async () => {
+      try {
+        const [overview, predictions, campaigns, recommendations] = await Promise.all([
+          api.get('dashboard/overview'),
+          api.get('predictions/'),
+          api.get('campaigns/'),
+          api.get('recommendations/'),
+        ]);
 
-  if (isLoading) {
+        setData({
+          overview: overview.data,
+          predictions: predictions.data,
+          campaigns: campaigns.data,
+          recommendations: recommendations.data,
+        });
+      } catch (err) {
+        console.error('Error fetching dashboard data:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDashboardData();
+  }, []);
+
+  if (loading) {
     return (
-      <div className="min-h-screen bg-lavender/20 flex flex-col items-center justify-center gap-6">
-        <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
-        <div className="text-primary font-black uppercase tracking-widest animate-pulse">Initializing Dashboard...</div>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
+        <p style={{ fontWeight: 800, color: '#4f46e5', letterSpacing: '0.1em' }}>INITIALIZING...</p>
       </div>
     );
   }
 
+  const { overview, predictions, campaigns, recommendations } = data || {};
+
   return (
-    <main className="min-h-screen bg-lavender/20">
-      <Navbar />
-      <div className="container mx-auto px-6 py-20">
-        <div className="bg-white p-12 rounded-[2.5rem] shadow-xl border border-lavender/50 text-center">
-          <h1 className="text-4xl font-black font-heading text-brand-dark mb-4 italic">
-            Hello Dashboard
-          </h1>
-          <p className="text-brand-gray font-bold text-lg">
-            Welcome back to your Smart Marketing command center.
-          </p>
-          <div className="mt-12 p-24 border-4 border-dashed border-lavender rounded-[2rem] flex flex-col items-center justify-center gap-4 group hover:border-primary/30 transition-colors">
-            <div className="w-20 h-20 rounded-full bg-lavender flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-plus"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
-            </div>
-            <div className="text-lavender font-black text-2xl uppercase tracking-widest group-hover:text-primary/30 transition-colors">
-              Empty Dashboard
-            </div>
-          </div>
+    <div className={styles.dashboardGrid}>
+      <Header />
+
+      <div className={styles.dashboardGrid}>
+        {/* Row 1: Stat Cards */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '20px' }}>
+          <StatCard 
+            label="Campagnes" 
+            value={overview?.total_campaigns || 0} 
+            trend="+12.7%" 
+            trendUp 
+          />
+          <StatCard 
+            label="Actives" 
+            value={overview?.active_campaigns || 0} 
+            trend="+25.1%" 
+            trendUp 
+          />
+          <StatCard 
+            label="Conversion" 
+            value={`${((overview?.avg_predicted_rate || 0) * 100).toFixed(0)}%`} 
+            trend="+1.1x" 
+            trendUp 
+          />
+          <StatCard 
+            label="Clients" 
+            value={overview?.total_customers || 0} 
+            trend="+8.3%" 
+            trendUp 
+          />
+          <StatCard 
+            label="Segments" 
+            value={overview?.total_segments || 0} 
+          />
+        </div>
+
+        {/* Row 2: Charts (Line & Bar) */}
+        <div style={{ display: 'flex', gap: '20px' }}>
+          <SectionLineChart data={predictions || []} />
+          <SectionBarChart data={campaigns || []} />
+        </div>
+
+        {/* Row 3: Bottom Grid (Donut & Recommendations) */}
+        <div style={{ display: 'flex', gap: '20px' }}>
+          <SectionDonutChart data={campaigns || []} />
+          <Recommendations 
+            recommendations={(recommendations || []).map((r: any, idx: number) => ({ id: idx, text: r.advice_text }))} 
+          />
         </div>
       </div>
-    </main>
+    </div>
   );
 }

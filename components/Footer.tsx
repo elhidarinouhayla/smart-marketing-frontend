@@ -48,7 +48,6 @@ export default function Footer() {
             <ul className="space-y-4 font-bold text-brand-gray">
               <li><Link href="#features" className="hover:text-primary transition-colors">AI Features</Link></li>
               <li><Link href="#" className="hover:text-primary transition-colors">Integrations</Link></li>
-              <li><Link href="#pricing" className="hover:text-primary transition-colors">Pricing Plans</Link></li>
               <li><Link href="#" className="hover:text-primary transition-colors">API Reference</Link></li>
               <li><Link href="#" className="hover:text-primary transition-colors">Changelog</Link></li>
             </ul>
