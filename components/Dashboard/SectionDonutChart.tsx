@@ -12,14 +12,9 @@ interface DonutChartProps {
   data: CampaignData[];
 }
 
-const COLORS = {
-  active: '#4f46e5',
-  draft: '#cbd5e1',
-  inactive: '#94a3b8'
-};
+const DONUT_COLORS = ["#c8e829", "#b5d420", "#a0bc1a", "#8ca814", "#78940e"];
 
 export default function SectionDonutChart({ data }: DonutChartProps) {
-  // Aggregate data by status
   const statuses = data.reduce((acc: any, curr) => {
     const s = curr.status.toLowerCase();
     acc[s] = (acc[s] || 0) + 1;
@@ -27,10 +22,10 @@ export default function SectionDonutChart({ data }: DonutChartProps) {
   }, {});
 
   const chartData = [
-    { name: 'Active', value: statuses.active || 0, color: COLORS.active },
-    { name: 'Draft', value: statuses.draft || 0, color: COLORS.draft },
-    { name: 'Inactive', value: statuses.inactive || 0, color: COLORS.inactive }
-  ];
+    { name: 'Active', value: statuses.active || 0 },
+    { name: 'Draft', value: statuses.draft || 0 },
+    { name: 'Inactive', value: statuses.inactive || 0 }
+  ].filter(d => d.value > 0);
 
   return (
     <div className={styles.root}>
@@ -48,8 +43,8 @@ export default function SectionDonutChart({ data }: DonutChartProps) {
                 paddingAngle={5}
                 dataKey="value"
               >
-                {chartData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} strokeWidth={0} />
+                {chartData.map((_, index) => (
+                  <Cell key={`cell-${index}`} fill={DONUT_COLORS[index % DONUT_COLORS.length]} strokeWidth={0} />
                 ))}
               </Pie>
             </PieChart>
@@ -57,9 +52,9 @@ export default function SectionDonutChart({ data }: DonutChartProps) {
         </div>
 
         <div className={styles.legend}>
-          {chartData.map((item) => (
+          {chartData.map((item, index) => (
             <div key={item.name} className={styles.legendItem}>
-              <div className={styles.bullet} style={{ backgroundColor: item.color }} />
+              <div className={styles.bullet} style={{ backgroundColor: DONUT_COLORS[index % DONUT_COLORS.length] }} />
               <div className={styles.legendText}>
                 {item.name} — <span className={styles.count}>{item.value}</span>
               </div>
