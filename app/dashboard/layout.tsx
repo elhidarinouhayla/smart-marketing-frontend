@@ -7,6 +7,7 @@ import styles from './Layout.module.css';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -39,8 +40,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   return (
     <div className={styles.root}>
-      <Sidebar />
-      <main className={styles.mainContent}>
+      <Sidebar isCollapsed={isCollapsed} onToggle={() => setIsCollapsed(!isCollapsed)} />
+      <main className={`${styles.mainContent} ${isCollapsed ? styles.expanded : ''}`}>
         {children}
       </main>
     </div>

@@ -134,26 +134,28 @@ export default function Dashboard() {
           />
         </div>
 
-        {/* Row 2: Charts (Middle section from image) */}
-        <div className={styles.middleRow}>
-          <div className={styles.barChartContainer}>
+        {/* Charts and Insights Grid (2x2 as in the image) */}
+        <div className={styles.dashboardGrid}>
+          {/* Top Left: Line Chart */}
+          <div className={styles.gridItem}>
+            <SectionLineChart data={predictions} />
+          </div>
+
+          {/* Top Right: Bar Chart */}
+          <div className={styles.gridItem}>
             <SectionBarChart data={campaigns} />
           </div>
-          <div className={styles.donutChartContainer}>
+
+          {/* Bottom Left: Donut Chart */}
+          <div className={styles.gridItem}>
             <SectionDonutChart data={campaigns} />
           </div>
-        </div>
 
-        {/* Row 3: Bottom Grid (Table & Recommendations/Heatmap placeholder) */}
-        <div className={styles.bottomRow}>
-          <div className={styles.tableContainer}>
-             <h3 className={styles.rowTitle}>Campaign Overview</h3>
-             <Recommendations 
+          {/* Bottom Right: Recommendations */}
+          <div className={styles.gridItem}>
+            <Recommendations 
               recommendations={recommendations.map((r: { advice_text: string }, idx: number) => ({ id: idx, text: r.advice_text }))} 
             />
-          </div>
-          <div className={styles.sectionPlaceholder}>
-            <SectionLineChart data={predictions} />
           </div>
         </div>
       </div>

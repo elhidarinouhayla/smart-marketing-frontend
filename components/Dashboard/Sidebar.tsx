@@ -8,11 +8,21 @@ import {
   Target, 
   TrendingUp, 
   Lightbulb, 
-  Users 
+  Users,
+  ChevronLeft,
+  ChevronRight,
+  Settings,
+  HelpCircle,
+  LogOut
 } from 'lucide-react';
 import styles from './Sidebar.module.css';
 
-export default function Sidebar() {
+interface SidebarProps {
+  isCollapsed: boolean;
+  onToggle: () => void;
+}
+
+export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
   const pathname = usePathname();
 
   const navItems = [
@@ -24,14 +34,17 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className={styles.sidebar}>
+    <aside className={`${styles.sidebar} ${isCollapsed ? styles.collapsed : ''}`}>
       <div className={styles.logoArea}>
         <div className={styles.logoIcon}>S</div>
-        <span className={styles.logoText}>SmartMarketing</span>
+        {!isCollapsed && <span className={styles.logoText}>SmartMarketing</span>}
+        <button className={styles.toggleBtn} onClick={onToggle}>
+          {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+        </button>
       </div>
 
       <nav className={styles.navSection}>
-        <p className={styles.navLabel}>Navigation</p>
+        <p className={styles.navLabel}>{isCollapsed ? '•••' : 'Navigation'}</p>
         <ul className={styles.navList}>
           {navItems.map((item) => {
             const isActive = pathname === item.path || (item.path === '/dashboard' && pathname === '/dashboard');
@@ -39,10 +52,11 @@ export default function Sidebar() {
               <li key={item.label} className={styles.navItem}>
                 <Link 
                   href={item.path} 
+                  title={isCollapsed ? item.label : ''}
                   className={`${styles.navLink} ${isActive ? styles.activeNavLink : ''}`}
                 >
                   <item.icon className={styles.navIcon} size={18} />
-                  {item.label}
+                  {!isCollapsed && item.label}
                 </Link>
               </li>
             );
@@ -53,13 +67,22 @@ export default function Sidebar() {
       <div className={styles.footerSection}>
          <ul className={styles.navList}>
            <li className={styles.navItem}>
-             <span className={styles.navLink}><LayoutDashboard size={18} /> Settings</span>
+             <span className={styles.navLink} title={isCollapsed ? 'Settings' : ''}>
+               <Settings size={18} /> 
+               {!isCollapsed && ' Settings'}
+             </span>
            </li>
            <li className={styles.navItem}>
-             <span className={styles.navLink}><Lightbulb size={18} /> Help Center</span>
+             <span className={styles.navLink} title={isCollapsed ? 'Help Center' : ''}>
+               <HelpCircle size={18} /> 
+               {!isCollapsed && ' Help Center'}
+             </span>
            </li>
            <li className={styles.navItem}>
-             <Link href="/" className={styles.navLink}><Target size={18} /> Logout</Link>
+             <Link href="/" className={styles.navLink} title={isCollapsed ? 'Logout' : ''}>
+               <LogOut size={18} /> 
+               {!isCollapsed && ' Logout'}
+             </Link>
            </li>
          </ul>
       </div>
