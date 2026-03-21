@@ -1,18 +1,44 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Header.module.css';
 
 export default function Header() {
+  const [username, setUsername] = useState('Evelyn');
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('auth_user');
+    if (storedUser) {
+      setUsername(storedUser);
+    }
+  }, []);
+
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(part => part[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
   return (
     <header className={styles.header}>
-      <div className={styles.titleGroup}>
-        <h1 className={styles.title}>Marketing Intelligence Overview</h1>
-        <p className={styles.subtitle}>Suivez vos performances en temps réel</p>
+      <div className={styles.titleSection}>
+        <h1 className={styles.welcomeText}>Welcome, {username}!</h1>
+        <p className={styles.subtitle}>Track your performance in real-time</p>
       </div>
-      <div className={styles.badge}>
-        <span className={styles.dot} />
-        Live Data
+      
+      <div className={styles.actionsSection}>
+        <div className={styles.searchBar}>
+          <span className={styles.searchIcon}>🔍</span>
+          <input type="text" placeholder="Search..." className={styles.searchInput} />
+          <span className={styles.searchHint}>⌘ K</span>
+        </div>
+        <div className={styles.profileInfo}>
+          <div className={styles.notificationIcon}>🔔</div>
+          <div className={styles.avatar}>{getInitials(username)}</div>
+        </div>
       </div>
     </header>
   );
