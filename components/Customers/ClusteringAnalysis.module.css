@@ -1,98 +1,96 @@
 .root {
-  background-color: white;
+  background-color: #111111;
   padding: 32px;
   border-radius: 24px;
-  border: 1px solid #ebf0f9;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 3px solid #c8e829;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .title {
   font-size: 18px;
-  font-weight: 800;
-  color: #1e1b4b;
+  font-weight: 900;
+  color: #ffffff;
   margin-bottom: 32px;
+  letter-spacing: -0.01em;
 }
 
-.controls {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  margin-bottom: 32px;
+.badge {
+  font-size: 10px;
+  color: #737373;
+  font-weight: 700;
+  background-color: rgba(255, 255, 255, 0.02);
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-left: 12px;
 }
 
-.formGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.label {
+.subtitle {
   font-size: 11px;
   font-weight: 800;
-  color: #1e1b4b;
+  color: #737373;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
 }
 
-.input {
-  background-color: #f8fafc;
-  border: 1px solid #ebf0f9;
-  padding: 10px 16px;
+.rangeInput {
+  width: 100%;
+  accent-color: #c8e829;
+  cursor: pointer;
+}
+
+.kValue {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 14px;
-  font-weight: 600;
-  color: #1e1b4b;
+  font-weight: 800;
+  color: #ffffff;
+  height: 40px;
 }
 
 .btnAction {
-  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
-  color: white;
-  padding: 12px 24px;
+  background-color: #2563eb; /* Primary blue button from image */
+  color: #ffffff;
+  padding: 14px;
+  width: 100%;
   border-radius: 12px;
   border: none;
-  font-size: 13px;
-  font-weight: 900;
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
-  align-self: flex-end;
+  margin-top: 16px;
+  transition: all 0.3s ease;
 }
 
-.statsGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-
-.statCard {
-  background-color: #f8faff;
-  padding: 16px;
-  border-radius: 16px;
-  border: 1px solid #ebf0f9;
-  text-align: center;
-}
-
-.statLabel {
-  font-size: 11px;
-  font-weight: 800;
-  color: #94a3b8;
-  margin-bottom: 8px;
-  text-transform: uppercase;
-}
-
-.statValue {
-  font-size: 18px;
-  font-weight: 900;
-  color: #1e1b4b;
+.btnAction:hover:not(:disabled) {
+  filter: brightness(1.2);
+  transform: translateY(-2px);
 }
 
 .msg {
-  padding: 16px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 700;
   margin-top: 16px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.success {
-  background-color: #ecfdf5;
-  color: #065f46;
+.bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
