@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #4F46E5;
-  --color-primary-accent: #6366F1;
-  --color-brand-dark: #1E1B4B;
-  --color-brand-gray: #6B7280;
-  --color-lavender: #F5F3FF;
+  --color-primary: #c8e829;
+  --color-primary-accent: #b5d420;
+  --color-brand-dark: #111111;
+  --color-brand-gray: #9ca3af;
+  --color-lavender: rgba(200, 232, 41, 0.12);
+  --color-success-green: #18a45e;
   
   --font-sans: var(--font-dm-sans);
   --font-heading: var(--font-plus-jakarta-sans);
@@ -14,31 +15,36 @@
 }
 
 :root {
-  --background: #FFFFFF;
-  --foreground: #1E1B4B;
+  --bg-primary: #1a1a1a;
+  --bg-card: #ffffff;
+  --bg-sidebar: #111111;
+  --accent-primary: #c8e829;
+  --text-primary: #ffffff;
+  --text-muted: #9ca3af;
+  --border: rgba(255, 255, 255, 0.08);
+
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
 }
 
-/* Force light mode colors as defaults */
 body {
-  background-color: #FFFFFF !important;
-  color: #1E1B4B !important;
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
   font-family: var(--font-dm-sans), sans-serif;
+  margin: 0;
 }
 
-/* Explicitly ensure headings are dark */
 h1, h2, h3, h4, h5, h6 {
-  color: #1E1B4B !important;
+  color: var(--text-primary) !important;
   font-family: var(--font-plus-jakarta-sans), sans-serif;
-  font-weight: 700;
 }
 
-/* Override Tailwind classes that might be affected by dark mode defaults */
 .text-foreground {
-  color: #1E1B4B !important;
+  color: var(--text-primary) !important;
 }
 
 .text-secondary {
-  color: #6B7280 !important;
+  color: var(--text-muted) !important;
 }
 
 .card-rounded {
