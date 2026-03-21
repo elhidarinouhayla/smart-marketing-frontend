@@ -1,57 +1,57 @@
 .sidebar {
-  width: 240px;
-  position: fixed;
-  left: 0;
-  top: 0;
+  width: 280px;
+  background-color: var(--bg-sidebar);
   height: 100vh;
-  background-color: #ffffff;
-  border-right: 1px solid #ebf0f9;
   display: flex;
   flex-direction: column;
   padding: 32px 0;
-  z-index: 100;
-  box-sizing: border-box;
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  flex-shrink: 0;
+  overflow-y: auto;
 }
 
 .logoArea {
   padding: 0 32px;
-  margin-bottom: 48px;
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-bottom: 48px;
 }
 
 .logoIcon {
   width: 32px;
   height: 32px;
-  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+  background-color: var(--color-primary);
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #111111;
   font-weight: 900;
   font-size: 18px;
 }
 
 .logoText {
-  font-size: 16px;
-  font-weight: 700;
-  color: #1e1b4b;
+  font-size: 20px;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -0.02em;
 }
 
 .navSection {
-  margin-bottom: 24px;
+  flex: 1;
 }
 
 .navLabel {
   padding: 0 32px;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
+  color: #737373;
   text-transform: uppercase;
-  color: #94a3b8;
-  letter-spacing: 0.1em;
-  margin-bottom: 16px;
+  letter-spacing: 0.15em;
+  margin-bottom: 20px;
 }
 
 .navList {
@@ -61,77 +61,33 @@
 }
 
 .navItem {
-  padding: 0 16px;
   margin-bottom: 4px;
 }
 
 .navLink {
-  padding: 12px 16px;
+  padding: 12px 32px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  font-weight: 600;
-  color: #64748b;
-  border-radius: 12px;
+  gap: 16px;
+  color: #a3a3a3;
   font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
   transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.navLink:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+  color: #ffffff;
 }
 
 .activeNavLink {
-  background-color: #eff6ff;
-  color: #4f46e5;
+  background-color: var(--color-primary);
+  color: #111111 !important;
 }
 
-.navLink:hover:not(.activeNavLink) {
-  background-color: #f8fafc;
-  color: #1e293b;
-}
-
-.navIcon {
-  width: 18px;
-  height: 18px;
-}
-
-.userArea {
-  margin-top: auto;
-  padding: 0 16px;
-}
-
-.userCard {
-  background-color: #f8faff;
-  padding: 16px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.avatar {
-  width: 40px;
-  height: 40px;
-  background-color: #4f46e5;
-  color: white;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-}
-
-.userInfo {
-  display: flex;
-  flex-direction: column;
-}
-
-.userName {
-  font-size: 14px;
-  font-weight: 700;
-  color: #1e1b4b;
-}
-
-.userRole {
-  font-size: 11px;
-  color: #94a3b8;
-  font-weight: 600;
+.footerSection {
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
 }
