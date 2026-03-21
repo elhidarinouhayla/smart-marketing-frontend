@@ -17,10 +17,10 @@ export default function Sidebar() {
 
   const navItems = [
     { label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
-    { label: 'Campagnes', icon: Target, path: '/dashboard/campaigns' },
-    { label: 'Prédictions', icon: TrendingUp, path: '/dashboard/predictions' },
-    { label: 'Recommandations', icon: Lightbulb, path: '/dashboard/recommendations' },
-    { label: 'Clients', icon: Users, path: '/dashboard/customers' },
+    { label: 'Leads & Conversion', icon: Target, path: '/dashboard/campaigns' },
+    { label: 'Campaign Analytics', icon: Target, path: '/dashboard/predictions' },
+    { label: 'Customer Insights', icon: Lightbulb, path: '/dashboard/customers' },
+    { label: 'AI Recommendations', icon: Lightbulb, path: '/dashboard/recommendations' },
   ];
 
   return (
@@ -50,14 +50,18 @@ export default function Sidebar() {
         </ul>
       </nav>
 
-      <div className={styles.userArea}>
-        <div className={styles.userCard}>
-          <div className={styles.avatar}>U</div>
-          <div className={styles.userInfo}>
-            <span className={styles.userName}>Utilisateur</span>
-            <span className={styles.userRole}>Marketing Manager</span>
-          </div>
-        </div>
+      <div className={styles.footerSection}>
+         <ul className={styles.navList}>
+           <li className={styles.navItem}>
+             <span className={styles.navLink}><LayoutDashboard size={18} /> Settings</span>
+           </li>
+           <li className={styles.navItem}>
+             <span className={styles.navLink}><Lightbulb size={18} /> Help Center</span>
+           </li>
+           <li className={styles.navItem}>
+             <Link href="/" className={styles.navLink}><Target size={18} /> Logout</Link>
+           </li>
+         </ul>
       </div>
     </aside>
   );
