@@ -17,7 +17,10 @@ interface CustomerTableProps {
 export default function CustomerTable({ customers }: CustomerTableProps) {
   return (
     <div className={styles.root}>
-      <h2 className={styles.title}>Base de Données Clients</h2>
+      <h2 className={styles.title}>
+        Customer Database
+        <span className={styles.badge}>GET /customers/</span>
+      </h2>
       
       <div className={styles.tableContainer}>
         <table className={styles.table}>
@@ -37,11 +40,9 @@ export default function CustomerTable({ customers }: CustomerTableProps) {
                   <td className={styles.td}>{c.age} ans</td>
                   <td className={styles.td}>{c.income.toLocaleString()}</td>
                   <td className={styles.td}>
-                    {c.segment_label ? (
-                      <span className={styles.segment}>{c.segment_label}</span>
-                    ) : (
-                      <span style={{ fontStyle: 'italic', opacity: 0.5 }}>Non segmenté</span>
-                    )}
+                    <span className={`${styles.segment} ${styles[(c.segment_label || 'non_segmente').toLowerCase()]}`}>
+                      {c.segment_label || 'Non segmenté'}
+                    </span>
                   </td>
                 </tr>
               ))
