@@ -16,13 +16,16 @@ interface RecommendationHistoryProps {
 export default function RecommendationHistory({ recommendations }: RecommendationHistoryProps) {
   return (
     <div className={styles.root}>
-      <h2 className={styles.title}>Derniers Conseils Générés</h2>
+      <h2 className={styles.title}>
+        Recommendation History
+        <span className={styles.badge}>GET /recommendations/</span>
+      </h2>
       
       <table className={styles.table}>
         <thead>
           <tr>
-            <th className={styles.th}>ID Campagne</th>
-            <th className={styles.th}>Recommandation Stratégique</th>
+            <th className={styles.th}>Campaign ID</th>
+            <th className={styles.th}>Strategic Recommendation</th>
           </tr>
         </thead>
         <tbody>
