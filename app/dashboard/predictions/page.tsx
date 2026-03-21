@@ -26,8 +26,15 @@ export default function PredictionsPage() {
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
-        <p style={{ fontWeight: 800, color: '#4f46e5', letterSpacing: '0.1em' }}>CHARGEMENT DES RECOMMANDATIONS...</p>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: '20px' }}>
+        <div style={{ width: '40px', height: '40px', border: '4px solid rgba(200, 232, 41, 0.1)', borderTop: '4px solid #c8e829', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
+        <p style={{ fontWeight: 900, color: '#c8e829', letterSpacing: '0.2em', fontSize: '12px' }}>INITIALISATION DES MODÈLES IA...</p>
+        <style>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
       </div>
     );
   }
@@ -35,8 +42,8 @@ export default function PredictionsPage() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
       <header>
-        <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#1e1b4b', margin: 0 }}>Analyse Prédictive IA</h1>
-        <p style={{ fontSize: '14px', fontWeight: 600, color: '#94a3b8', marginTop: '8px' }}>Utilisez nos modèles de Machine Learning pour prédire l'impact de vos campagnes.</p>
+        <h1 style={{ fontSize: '32px', fontWeight: 900, color: '#ffffff', margin: 0, letterSpacing: '-0.02em' }}>Campaign Analytics</h1>
+        <p style={{ fontSize: '14px', fontWeight: 600, color: '#737373', marginTop: '8px' }}>Utilisez nos modèles de Machine Learning pour prédire l'impact de vos campagnes.</p>
       </header>
 
       <PredictionForm onSuccess={fetchHistory} />
