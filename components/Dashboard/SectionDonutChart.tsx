@@ -12,7 +12,13 @@ interface DonutChartProps {
   data: CampaignData[];
 }
 
-const DONUT_COLORS = ["#c8e829", "#b5d420", "#a0bc1a", "#8ca814", "#78940e"];
+const STATUS_COLORS: { [key: string]: string } = {
+  'Active': "#c8e829",
+  'Paused': "#94a3b8",
+  'Inactive': "#475569",
+  'Draft': "#3b82f6"
+};
+const DEFAULT_STATUS_COLOR = "#78940e";
 
 export default function SectionDonutChart({ data }: DonutChartProps) {
   const statuses = data.reduce((acc: any, curr) => {
@@ -24,7 +30,8 @@ export default function SectionDonutChart({ data }: DonutChartProps) {
   const chartData = [
     { name: 'Active', value: statuses.active || 0 },
     { name: 'Draft', value: statuses.draft || 0 },
-    { name: 'Inactive', value: statuses.inactive || 0 }
+    { name: 'Inactive', value: statuses.inactive || 0 },
+    { name: 'Paused', value: (statuses.paused || 0) + (statuses.en_pause || 0) }
   ].filter(d => d.value > 0);
 
   return (
@@ -43,8 +50,8 @@ export default function SectionDonutChart({ data }: DonutChartProps) {
                 paddingAngle={5}
                 dataKey="value"
               >
-                {chartData.map((_, index) => (
-                  <Cell key={`cell-${index}`} fill={DONUT_COLORS[index % DONUT_COLORS.length]} strokeWidth={0} />
+                {chartData.map((item) => (
+                  <Cell key={`cell-${item.name}`} fill={STATUS_COLORS[item.name] || DEFAULT_STATUS_COLOR} strokeWidth={0} />
                 ))}
               </Pie>
             </PieChart>
@@ -52,9 +59,9 @@ export default function SectionDonutChart({ data }: DonutChartProps) {
         </div>
 
         <div className={styles.legend}>
-          {chartData.map((item, index) => (
+          {chartData.map((item) => (
             <div key={item.name} className={styles.legendItem}>
-              <div className={styles.bullet} style={{ backgroundColor: DONUT_COLORS[index % DONUT_COLORS.length] }} />
+              <div className={styles.bullet} style={{ backgroundColor: STATUS_COLORS[item.name] || DEFAULT_STATUS_COLOR }} />
               <div className={styles.legendText}>
                 {item.name} — <span className={styles.count}>{item.value}</span>
               </div>

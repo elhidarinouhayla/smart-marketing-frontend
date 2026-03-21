@@ -53,9 +53,16 @@
   margin-bottom: 24px;
 }
 
+.gridItem.fullWidth {
+  grid-column: span 2;
+}
+
 @media (max-width: 1200px) {
   .dashboardGrid {
     grid-template-columns: 1fr;
+  }
+  .gridItem.fullWidth {
+    grid-column: span 1;
   }
 }
 

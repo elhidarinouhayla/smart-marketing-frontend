@@ -7,6 +7,7 @@ import StatCard from '@/components/Dashboard/StatCard';
 import SectionLineChart from '@/components/Dashboard/SectionLineChart';
 import SectionBarChart from '@/components/Dashboard/SectionBarChart';
 import SectionDonutChart from '@/components/Dashboard/SectionDonutChart';
+import SectionSegmentChart from '@/components/Dashboard/SectionSegmentChart';
 import Recommendations from '@/components/Dashboard/Recommendations';
 import api from '@/lib/axios';
 import styles from './Dashboard.module.css';
@@ -22,6 +23,11 @@ interface DashboardData {
   predictions: Array<{ probability: number }>;
   campaigns: Array<{ status: string; channel: string }>;
   recommendations: Array<{ advice_text: string }>;
+  segments: {
+    segments: {
+      [key: string]: number;
+    };
+  };
 }
 
 export default function Dashboard() {
@@ -41,10 +47,11 @@ export default function Dashboard() {
           api.get('predictions/'),
           api.get('campaigns/'),
           api.get('recommendations/'),
+          api.get('customers/segments'),
         ]);
 
         const successfulResults = results.map(r => r.status === 'fulfilled' ? r.value : null);
-        const [overview, predictions, campaigns, recommendations] = successfulResults;
+        const [overview, predictions, campaigns, recommendations, segments] = successfulResults;
 
         // If core data (overview) failed, we might want to show an error
         if (!overview) {
@@ -63,6 +70,7 @@ export default function Dashboard() {
           predictions: predictions?.data || [],
           campaigns: campaigns?.data || [],
           recommendations: recommendations?.data || [],
+          segments: segments?.data || { segments: {} },
         });
       } catch (err) {
         console.error('Error fetching dashboard data:', err);
@@ -90,11 +98,12 @@ export default function Dashboard() {
     );
   }
 
-  const { overview, predictions, campaigns, recommendations } = data || {
+  const { overview, predictions, campaigns, recommendations, segments } = data || {
     overview: { total_campaigns: 0, active_campaigns: 0, avg_predicted_rate: 0, total_customers: 0, total_segments: 0 },
     predictions: [],
     campaigns: [],
-    recommendations: []
+    recommendations: [],
+    segments: { segments: {} }
   };
 
   return (
@@ -146,15 +155,19 @@ export default function Dashboard() {
             <SectionBarChart data={campaigns} />
           </div>
 
-          {/* Bottom Left: Donut Chart */}
+          {/* Mid Row: Donut Chart and Segment Chart */}
           <div className={styles.gridItem}>
             <SectionDonutChart data={campaigns} />
           </div>
 
-          {/* Bottom Right: Recommendations */}
           <div className={styles.gridItem}>
+            <SectionSegmentChart data={segments} />
+          </div>
+
+          {/* Bottom Row (Full width recommendation or shared) */}
+          <div className={`${styles.gridItem} ${styles.fullWidth}`}>
             <Recommendations 
-              recommendations={recommendations.map((r: { advice_text: string }, idx: number) => ({ id: idx, text: r.advice_text }))} 
+              recommendations={recommendations.slice(-3).map((r: { advice_text: string }, idx: number) => ({ id: idx, text: r.advice_text }))} 
             />
           </div>
         </div>

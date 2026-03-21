@@ -27,8 +27,17 @@ export default function SectionLineChart({ data }: LineChartProps) {
               </linearGradient>
             </defs>
             <Tooltip 
-              contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #ebf0f9', borderRadius: '12px', color: '#111111', fontWeight: 700 }}
-              itemStyle={{ color: '#c8e829' }}
+              contentStyle={{ backgroundColor: '#141414', border: '1px solid #333', borderRadius: '12px', color: '#ffffff', fontWeight: 700 }}
+              itemStyle={{ color: '#ffffff' }}
+              formatter={(value: any) => [`${Number(value).toFixed(1)}%`, 'Taux']}
+            />
+            <YAxis 
+               domain={[0, 100]} 
+               tickFormatter={(val) => `${val}%`}
+               axisLine={false}
+               tickLine={false}
+               tick={{ fill: '#737373', fontSize: 10, fontWeight: 700 }}
+               width={40}
             />
             <Area 
                type="monotone" 
