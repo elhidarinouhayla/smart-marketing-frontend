@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Header from '@/components/Dashboard/Header';
+import { Target, Users } from 'lucide-react';
 import StatCard from '@/components/Dashboard/StatCard';
 import SectionLineChart from '@/components/Dashboard/SectionLineChart';
 import SectionBarChart from '@/components/Dashboard/SectionBarChart';
@@ -10,28 +11,62 @@ import Recommendations from '@/components/Dashboard/Recommendations';
 import api from '@/lib/axios';
 import styles from './Dashboard.module.css';
 
+interface DashboardData {
+  overview: {
+    total_campaigns: number;
+    active_campaigns: number;
+    avg_predicted_rate: number;
+    total_customers: number;
+    total_segments: number;
+  };
+  predictions: Array<{ probability: number }>;
+  campaigns: Array<{ status: string; channel: string }>;
+  recommendations: Array<{ advice_text: string }>;
+}
+
 export default function Dashboard() {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const [overview, predictions, campaigns, recommendations] = await Promise.all([
+        setLoading(true);
+        setError(null);
+
+        // We use Promise.allSettled to be more resilient if one API fails
+        const results = await Promise.allSettled([
           api.get('dashboard/overview'),
           api.get('predictions/'),
           api.get('campaigns/'),
           api.get('recommendations/'),
         ]);
 
+        const successfulResults = results.map(r => r.status === 'fulfilled' ? r.value : null);
+        const [overview, predictions, campaigns, recommendations] = successfulResults;
+
+        // If core data (overview) failed, we might want to show an error
+        if (!overview) {
+          console.error('Core dashboard data failed to load');
+          // Still try to show what we have, but maybe show an error banner
+        }
+
         setData({
-          overview: overview.data,
-          predictions: predictions.data,
-          campaigns: campaigns.data,
-          recommendations: recommendations.data,
+          overview: overview?.data || {
+            total_campaigns: 0,
+            active_campaigns: 0,
+            avg_predicted_rate: 0,
+            total_customers: 0,
+            total_segments: 0
+          },
+          predictions: predictions?.data || [],
+          campaigns: campaigns?.data || [],
+          recommendations: recommendations?.data || [],
         });
       } catch (err) {
         console.error('Error fetching dashboard data:', err);
+        setError('Failed to load dashboard data. Please try again later.');
       } finally {
         setLoading(false);
       }
@@ -42,63 +77,84 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
-        <p style={{ fontWeight: 800, color: '#4f46e5', letterSpacing: '0.1em' }}>INITIALIZING...</p>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: '20px' }}>
+        <div style={{ width: '40px', height: '40px', border: '4px solid rgba(200, 232, 41, 0.1)', borderTop: '4px solid #c8e829', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
+        <p style={{ fontWeight: 900, color: '#c8e829', letterSpacing: '0.2em', fontSize: '12px' }}>INITIALIZING SYSTEM</p>
+        <style>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
       </div>
     );
   }
 
-  const { overview, predictions, campaigns, recommendations } = data || {};
+  const { overview, predictions, campaigns, recommendations } = data || {
+    overview: { total_campaigns: 0, active_campaigns: 0, avg_predicted_rate: 0, total_customers: 0, total_segments: 0 },
+    predictions: [],
+    campaigns: [],
+    recommendations: []
+  };
 
   return (
-    <div className={styles.dashboardGrid}>
+    <div className={styles.dashboardContainer}>
       <Header />
 
-      <div className={styles.dashboardGrid}>
-        {/* Row 1: Stat Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '20px' }}>
+      {error && (
+        <div style={{ backgroundColor: 'rgba(239, 68, 68, 0.1)', borderLeft: '4px solid #ef4444', padding: '16px', borderRadius: '12px', marginBottom: '24px', color: '#dc2626', fontWeight: 600 }}>
+          {error}
+        </div>
+      )}
+
+      <div className={styles.dashboardContent}>
+        {/* Row 1: Stat Cards (4 cards as in the image) */}
+        <div className={styles.statGrid}>
           <StatCard 
-            label="Campagnes" 
-            value={overview?.total_campaigns || 0} 
-            trend="+12.7%" 
-            trendUp 
+            label="Total Campaigns" 
+            value={overview.total_campaigns} 
+            icon="/icons/total_campaigns.png"
           />
           <StatCard 
-            label="Actives" 
-            value={overview?.active_campaigns || 0} 
-            trend="+25.1%" 
-            trendUp 
+            label="Active Now" 
+            value={overview.active_campaigns} 
+            icon={<div style={{ width: '40px', height: '40px', background: 'rgba(200, 232, 41, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ width: '12px', height: '12px', background: '#c8e829', borderRadius: '50%', boxShadow: '0 0 15px #c8e829' }} />
+            </div>}
           />
           <StatCard 
-            label="Conversion" 
-            value={`${((overview?.avg_predicted_rate || 0) * 100).toFixed(0)}%`} 
-            trend="+1.1x" 
-            trendUp 
+            label="Success Probability" 
+            value={`${((overview.avg_predicted_rate || 0) * 100).toFixed(1)}%`} 
+            icon={<Target size={32} color="#c8e829" strokeWidth={2.5} />}
           />
           <StatCard 
-            label="Clients" 
-            value={overview?.total_customers || 0} 
-            trend="+8.3%" 
-            trendUp 
-          />
-          <StatCard 
-            label="Segments" 
-            value={overview?.total_segments || 0} 
+            label="Total Customers" 
+            value={overview.total_customers.toLocaleString()} 
+            icon={<Users size={32} color="#c8e829" strokeWidth={2.5} />}
           />
         </div>
 
-        {/* Row 2: Charts (Line & Bar) */}
-        <div style={{ display: 'flex', gap: '20px' }}>
-          <SectionLineChart data={predictions || []} />
-          <SectionBarChart data={campaigns || []} />
+        {/* Row 2: Charts (Middle section from image) */}
+        <div className={styles.middleRow}>
+          <div className={styles.barChartContainer}>
+            <SectionBarChart data={campaigns} />
+          </div>
+          <div className={styles.donutChartContainer}>
+            <SectionDonutChart data={campaigns} />
+          </div>
         </div>
 
-        {/* Row 3: Bottom Grid (Donut & Recommendations) */}
-        <div style={{ display: 'flex', gap: '20px' }}>
-          <SectionDonutChart data={campaigns || []} />
-          <Recommendations 
-            recommendations={(recommendations || []).map((r: any, idx: number) => ({ id: idx, text: r.advice_text }))} 
-          />
+        {/* Row 3: Bottom Grid (Table & Recommendations/Heatmap placeholder) */}
+        <div className={styles.bottomRow}>
+          <div className={styles.tableContainer}>
+             <h3 className={styles.rowTitle}>Campaign Overview</h3>
+             <Recommendations 
+              recommendations={recommendations.map((r: { advice_text: string }, idx: number) => ({ id: idx, text: r.advice_text }))} 
+            />
+          </div>
+          <div className={styles.sectionPlaceholder}>
+            <SectionLineChart data={predictions} />
+          </div>
         </div>
       </div>
     </div>
