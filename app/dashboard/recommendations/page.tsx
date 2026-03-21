@@ -14,7 +14,7 @@ export default function RecommendationsPage() {
       const response = await api.get('recommendations/');
       setRecommendations(response.data);
     } catch (err) {
-      console.error('Error fetching recommendations history:', err);
+      console.error('Error fetching recommendation history:', err);
     } finally {
       setLoading(false);
     }
@@ -26,8 +26,15 @@ export default function RecommendationsPage() {
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
-        <p style={{ fontWeight: 800, color: '#4f46e5', letterSpacing: '0.1em' }}>GÉNÉRATION DES INSIGHTS...</p>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: '20px' }}>
+        <div style={{ width: '40px', height: '40px', border: '4px solid rgba(200, 232, 41, 0.1)', borderTop: '4px solid #c8e829', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
+        <p style={{ fontWeight: 900, color: '#c8e829', letterSpacing: '0.2em', fontSize: '12px' }}>INTERROGATION DU CERVEAU IA...</p>
+        <style>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
       </div>
     );
   }
@@ -35,8 +42,8 @@ export default function RecommendationsPage() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
       <header>
-        <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#1e1b4b', margin: 0 }}>Recommandations Stratégiques</h1>
-        <p style={{ fontSize: '14px', fontWeight: 600, color: '#94a3b8', marginTop: '8px' }}>Optimisez vos campagnes grâce aux conseils de l'intelligence artificielle Gemini.</p>
+        <h1 style={{ fontSize: '32px', fontWeight: 900, color: '#ffffff', margin: 0, letterSpacing: '-0.02em' }}>AI Recommendations</h1>
+        <p style={{ fontSize: '14px', fontWeight: 600, color: '#737373', marginTop: '8px' }}>Générez des plans d'action personnalisés grâce à l'IA générative Google Gemini.</p>
       </header>
 
       <RecommendationGenerator onSuccess={fetchHistory} />
