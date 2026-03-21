@@ -31,7 +31,11 @@ export default function SectionBarChart({ data }: BarChartProps) {
       <div className={styles.chartContainer}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={chartData}>
-            <Tooltip />
+            <Tooltip 
+              contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #ebf0f9', borderRadius: '12px', color: '#111111', fontWeight: 700 }}
+              itemStyle={{ color: '#c8e829' }}
+              cursor={{ fill: 'rgba(200, 232, 41, 0.05)' }}
+            />
             <XAxis dataKey="name" 
                axisLine={false} 
                tickLine={false} 
@@ -39,9 +43,10 @@ export default function SectionBarChart({ data }: BarChartProps) {
             />
             <Bar 
               dataKey="val" 
-              fill="#4f46e5" 
-              radius={[8, 8, 8, 8]} 
-              barSize={80}
+              fill="#c8e829" 
+              radius={[4, 4, 0, 0]} 
+              barSize={40}
+              animationDuration={1500}
             />
           </BarChart>
         </ResponsiveContainer>
