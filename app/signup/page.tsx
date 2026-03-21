@@ -76,9 +76,9 @@ export default function SignupPage() {
   }
 
   return (
-    <main className="min-h-screen bg-lavender/30 flex flex-col items-center justify-center p-6 relative overflow-hidden">
+    <main className="min-h-screen bg-[#1a1a1a] flex flex-col items-center justify-center p-6 relative overflow-hidden">
       {/* Background Dotted Pattern */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-30 bg-[radial-gradient(#4F46E5_1px,transparent_1px)] [background-size:24px_24px]"></div>
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-10 bg-[radial-gradient(#c8e829_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
       <div className="w-full max-w-md relative z-10">
         <Link 
@@ -89,21 +89,23 @@ export default function SignupPage() {
           Back to Home
         </Link>
         
-        <div className="bg-white p-10 rounded-[2.5rem] shadow-2xl border border-lavender/50 transition-all duration-300">
+        <div className="bg-white p-10 rounded-[2.5rem] shadow-2xl border border-white/5 transition-all duration-300">
           <div className="text-center mb-10">
             <Link href="/" className="inline-block mb-6">
-              <Image 
-                src="/logo.png" 
-                alt="SmartMD Logo" 
-                width={56} 
-                height={56} 
-                className="w-14 h-14 shadow-lg bg-white rounded-xl p-1.5"
-              />
+              <div className="w-14 h-14 bg-[#111111] rounded-2xl flex items-center justify-center shadow-lg transform -rotate-3 hover:rotate-0 transition-transform duration-300">
+                <Image 
+                  src="/logo.png" 
+                  alt="SmartMD Logo" 
+                  width={34} 
+                  height={34} 
+                  className="w-10 h-10 filter brightness-0 invert"
+                />
+              </div>
             </Link>
-            <h1 className="text-3xl font-black font-heading text-brand-dark mb-3 tracking-tight">
+            <h1 className="text-3xl font-black font-heading text-[#111111] mb-3 tracking-tight">
               Start Your AI Journey
             </h1>
-            <p className="text-brand-gray font-bold">
+            <p className="text-[#9ca3af] font-bold">
               Join 12k+ top-tier marketers today.
             </p>
           </div>
@@ -117,9 +119,9 @@ export default function SignupPage() {
 
             {/* Username */}
             <div className="space-y-2">
-              <label className="text-xs font-black uppercase tracking-widest text-brand-gray ml-1">Username</label>
+              <label className="text-xs font-black uppercase tracking-widest text-[#9ca3af] ml-1">Username</label>
               <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-brand-gray group-focus-within:text-primary transition-colors text-lavender/80">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-[#9ca3af] group-focus-within:text-[#c8e829] transition-colors">
                   <User size={18} />
                 </div>
                 <input 
@@ -129,16 +131,16 @@ export default function SignupPage() {
                   onChange={handleInputChange}
                   required
                   placeholder="marketing_pro"
-                  className="block w-full pl-11 pr-4 py-4 bg-lavender/20 border-2 border-transparent rounded-[1.25rem] font-bold text-primary placeholder:text-brand-gray focus:outline-none focus:ring-0 focus:border-primary/30 focus:bg-white transition-all shadow-sm"
+                  className="block w-full pl-11 pr-4 py-4 bg-[#f8f9ff] border-2 border-transparent rounded-[1.25rem] font-bold text-[#111111] placeholder:text-[#9ca3af] focus:outline-none focus:ring-0 focus:border-[#c8e829]/30 focus:bg-white transition-all shadow-sm"
                 />
               </div>
             </div>
 
             {/* Email */}
             <div className="space-y-2">
-              <label className="text-xs font-black uppercase tracking-widest text-brand-gray ml-1">Work Email</label>
+              <label className="text-xs font-black uppercase tracking-widest text-[#9ca3af] ml-1">Work Email</label>
               <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-brand-gray group-focus-within:text-primary transition-colors text-lavender/80">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-[#9ca3af] group-focus-within:text-[#c8e829] transition-colors">
                   <Mail size={18} />
                 </div>
                 <input 
@@ -148,16 +150,16 @@ export default function SignupPage() {
                   onChange={handleInputChange}
                   required
                   placeholder="name@company.com"
-                  className="block w-full pl-11 pr-4 py-4 bg-lavender/20 border-2 border-transparent rounded-[1.25rem] font-bold text-primary placeholder:text-brand-gray focus:outline-none focus:ring-0 focus:border-primary/30 focus:bg-white transition-all shadow-sm"
+                  className="block w-full pl-11 pr-4 py-4 bg-[#f8f9ff] border-2 border-transparent rounded-[1.25rem] font-bold text-[#111111] placeholder:text-[#9ca3af] focus:outline-none focus:ring-0 focus:border-[#c8e829]/30 focus:bg-white transition-all shadow-sm"
                 />
               </div>
             </div>
 
             {/* Password */}
             <div className="space-y-2">
-              <label className="text-xs font-black uppercase tracking-widest text-brand-gray ml-1">Password</label>
+              <label className="text-xs font-black uppercase tracking-widest text-[#9ca3af] ml-1">Password</label>
               <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-brand-gray group-focus-within:text-primary transition-colors text-lavender/80">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-[#9ca3af] group-focus-within:text-[#c8e829] transition-colors">
                   <Lock size={18} />
                 </div>
                 <input 
@@ -167,12 +169,12 @@ export default function SignupPage() {
                   onChange={handleInputChange}
                   required
                   placeholder="••••••••"
-                  className="block w-full pl-11 pr-12 py-4 bg-lavender/20 border-2 border-transparent rounded-[1.25rem] font-bold text-primary placeholder:text-brand-gray focus:outline-none focus:ring-0 focus:border-primary/30 focus:bg-white transition-all shadow-sm"
+                  className="block w-full pl-11 pr-12 py-4 bg-[#f8f9ff] border-2 border-transparent rounded-[1.25rem] font-bold text-[#111111] placeholder:text-[#9ca3af] focus:outline-none focus:ring-0 focus:border-[#c8e829]/30 focus:bg-white transition-all shadow-sm"
                 />
                 <button 
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-brand-gray hover:text-primary transition-colors"
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-[#9ca3af] hover:text-[#c8e829] transition-colors"
                 >
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
@@ -182,21 +184,23 @@ export default function SignupPage() {
             <button 
               type="submit" 
               disabled={isLoading}
-              className={`w-full py-5 rounded-full font-black text-lg transition-all shadow-xl shadow-primary/30 flex items-center justify-center gap-3 ${
+              className={`w-full py-5 rounded-full font-black text-lg transition-all shadow-xl flex items-center justify-center gap-3 ${
                 isLoading 
-                ? 'bg-lavender text-primary/40 cursor-not-allowed' 
-                : 'bg-primary text-white hover:bg-accent hover:-translate-y-1'
+                ? 'bg-[#111111]/10 text-[#111111]/40 cursor-not-allowed' 
+                : 'bg-[#c8e829] text-[#111111] hover:brightness-110 hover:-translate-y-1 shadow-[#c8e829]/20'
               }`}
             >
               {isLoading ? (
-                <div className="w-6 h-6 border-4 border-primary/20 border-t-white rounded-full animate-spin"></div>
-              ) : 'Sign Up'}
+                <div className="w-6 h-6 border-4 border-[#111111]/10 border-t-[#111111] rounded-full animate-spin"></div>
+              ) : (
+                <>Sign Up <ArrowLeft size={18} className="translate-x-1 rotate-180" /></>
+              )}
             </button>
           </form>
 
-          <p className="mt-10 text-center text-brand-gray font-bold">
+          <p className="mt-10 text-center text-[#9ca3af] font-bold">
             Already have an account? {' '}
-            <Link href="/login" className="text-primary hover:underline font-black">
+            <Link href="/login" className="text-[#c8e829] hover:underline font-black">
               Log In
             </Link>
           </p>
