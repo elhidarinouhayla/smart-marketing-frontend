@@ -9,7 +9,7 @@ interface ClusteringAnalysisProps {
 }
 
 export default function ClusteringAnalysis({ onClusteringComplete }: ClusteringAnalysisProps) {
-  const [clustersCount, setClustersCount] = useState(3);
+  const [clustersCount, setClustersCount] = useState(4);
   const [loading, setLoading] = useState(false);
   const [segments, setSegments] = useState<any[]>([]);
   const [message, setMessage] = useState('');
@@ -33,7 +33,8 @@ export default function ClusteringAnalysis({ onClusteringComplete }: ClusteringA
     setLoading(true);
     setMessage('');
     try {
-      await api.post('customers/clustering', { n_clusters: clustersCount });
+      // Backend expects n_clusters as a query parameter
+      await api.post(`customers/clustering?n_clusters=${clustersCount}`);
       setMessage('Segmentation IA réussie !');
       await fetchSegments();
       onClusteringComplete();
@@ -47,46 +48,39 @@ export default function ClusteringAnalysis({ onClusteringComplete }: ClusteringA
 
   return (
     <div className={styles.root}>
-      <h2 className={styles.title}>Analyse de Segmentation (K-Means)</h2>
+      <h2 className={styles.title}>
+        AI Segmentation Control
+        <span className={styles.badge}>POST /clustering</span>
+      </h2>
       
-      <div className={styles.controls}>
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Nombre de segments (K)</label>
+      <div className={styles.formGroup}>
+        <p className={styles.subtitle}>Number of Clusters (k)</p>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 60px', gap: '16px', alignItems: 'center' }}>
           <input 
-            className={styles.input} 
-            type="number" 
-            value={clustersCount}
+            type="range" 
+            min="2" 
+            max="6" 
+            step="1" 
+            value={clustersCount} 
             onChange={(e) => setClustersCount(Number(e.target.value))}
-            min={2}
-            max={10}
+            className={styles.rangeInput}
           />
+          <div className={styles.kValue}>{clustersCount}</div>
         </div>
-        <button 
-          className={styles.btnAction}
-          onClick={handleRunClustering}
-          disabled={loading}
-        >
-          {loading ? 'CALCUL EN COURS...' : 'LANCER LA SEGMENTATION IA'}
-        </button>
       </div>
 
-      {message && (
-        <div className={`${styles.msg} ${styles.success}`}>
-          {message}
-        </div>
-      )}
+      <button 
+        className={styles.btnAction}
+        onClick={handleRunClustering}
+        disabled={loading}
+      >
+        {loading ? 'CALCUL EN COURS...' : 'Run KMeans Clustering'}
+      </button>
 
-      {segments.length > 0 && (
-        <div style={{ marginTop: '32px' }}>
-          <p className={styles.label} style={{ marginBottom: '16px' }}>Dashboard des Segments :</p>
-          <div className={styles.statsGrid}>
-            {segments.map((seg, idx) => (
-              <div key={idx} className={styles.statCard}>
-                <div className={styles.statLabel}>{seg.label}</div>
-                <div className={styles.statValue}>{seg.count} Clients</div>
-              </div>
-            ))}
-          </div>
+      {message && (
+        <div className={styles.msg}>
+          <div className={styles.bullet} style={{ background: '#c8e829' }} />
+          {message}
         </div>
       )}
     </div>
