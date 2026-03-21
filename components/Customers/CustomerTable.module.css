@@ -1,26 +1,42 @@
 .root {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.02);
   padding: 32px;
   border-radius: 24px;
-  border: 1px solid #ebf0f9;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
 }
 
 .title {
   font-size: 18px;
-  font-weight: 800;
-  color: #1e1b4b;
+  font-weight: 900;
+  color: #ffffff;
   margin-bottom: 24px;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.badge {
+  font-size: 10px;
+  color: #737373;
+  font-weight: 700;
+  background-color: rgba(255, 255, 255, 0.02);
+  padding: 4px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
 }
 
 .tableContainer {
-  max-height: 400px;
+  max-height: 500px;
   overflow-y: auto;
+  border-radius: 12px;
 }
 
 .table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0 4px;
 }
 
 .th {
@@ -28,27 +44,39 @@
   padding: 16px;
   font-size: 11px;
   font-weight: 800;
-  color: #94a3b8;
-  border-bottom: 2px solid #f8faff;
+  text-transform: uppercase;
+  color: #737373;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   position: sticky;
   top: 0;
-  background-color: white;
+  background-color: #111111;
+  letter-spacing: 0.15em;
+  z-index: 10;
 }
 
 .td {
   padding: 16px;
   font-size: 14px;
   font-weight: 600;
-  color: #64748b;
-  border-bottom: 1px solid #f8faff;
+  color: #a3a3a3;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
 }
 
 .segment {
   display: inline-flex;
-  padding: 4px 10px;
+  padding: 6px 12px;
   border-radius: 8px;
-  background-color: #f1f5f9;
-  color: #475569;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(0, 0, 0, 0.03);
 }
+
+.low_engagement { background-color: #f1f5f9; color: #64748b; }
+.high_income_senior { background-color: #eff6ff; color: #1d4ed8; }
+.high_spender_female { background-color: #f5f3ff; color: #6d28d9; }
+.engaged_clicker { background-color: rgba(200, 232, 41, 0.15); color: #5a7a00; }
+.new_customer { background-color: #fff7ed; color: #c2410c; }
+.loyal_promoter { background-color: #f0fdfa; color: #0f766e; }
+.non_segmente { background-color: #f8fafc; color: #94a3b8; }
