@@ -23,31 +23,27 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-lavender py-4">
+    <nav className="sticky top-0 z-50 w-full bg-[#111111]/80 backdrop-blur-md border-b border-white/5 py-4">
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <Image 
-            src="/logo.png" 
-            alt="SmartMD Logo" 
-            width={32} 
-            height={32} 
-            className="w-8 h-8"
-          />
-          <span className="text-2xl font-bold text-primary font-heading tracking-tight">
-            SmartMD
+          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center font-bold text-black text-xl">
+            S
+          </div>
+          <span className="text-xl font-black text-white font-heading tracking-tight">
+            SmartMarketing
           </span>
         </Link>
 
         {/* Links */}
-        <div className="hidden md:flex items-center gap-8 text-brand-gray font-medium">
+        <div className="hidden md:flex items-center gap-8 text-[#737373] font-semibold text-sm uppercase tracking-wider">
           <Link href="/#features" className="hover:text-primary transition-colors">Features</Link>
           <Link href="/#solutions" className="hover:text-primary transition-colors">Solutions</Link>
           {isAuthenticated && (
             <Link 
               href="/dashboard" 
               className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
-                pathname === '/dashboard' ? 'bg-lavender text-primary' : 'hover:text-primary'
+                pathname.startsWith('/dashboard') ? 'bg-primary/10 text-primary' : 'hover:text-primary'
               }`}
             >
               <LayoutDashboard size={18} />
@@ -62,13 +58,13 @@ export default function Navbar() {
             <>
               <Link 
                 href="/login" 
-                className="text-brand-gray font-semibold hover:text-primary transition-colors px-4 py-2"
+                className="text-[#737373] font-bold hover:text-white transition-colors px-4 py-2"
               >
                 Login
               </Link>
               <Link 
                 href="/signup" 
-                className="bg-primary text-white font-semibold px-6 py-2.5 rounded-full hover:bg-accent transition-all shadow-lg shadow-primary/20"
+                className="bg-primary text-black font-bold px-6 py-2.5 rounded-full hover:brightness-110 transition-all shadow-lg shadow-primary/10"
               >
                 Get Started
               </Link>
@@ -76,7 +72,7 @@ export default function Navbar() {
           ) : (
             <button 
               onClick={handleLogout}
-              className="flex items-center gap-2 text-brand-gray font-semibold hover:text-red-500 transition-colors px-4 py-2 group"
+              className="flex items-center gap-2 text-[#737373] font-bold hover:text-red-500 transition-colors px-4 py-2 group"
             >
               <LogOut size={18} className="group-hover:translate-x-1 transition-transform" />
               Logout
