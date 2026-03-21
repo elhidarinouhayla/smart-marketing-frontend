@@ -1,16 +1,17 @@
 .root {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.03);
   padding: 32px;
   border-radius: 24px;
-  border: 1px solid #ebf0f9;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
 }
 
 .title {
   font-size: 18px;
-  font-weight: 800;
-  color: #1e1b4b;
+  font-weight: 900;
+  color: #ffffff;
   margin-bottom: 32px;
+  letter-spacing: -0.01em;
 }
 
 .formGrid {
@@ -28,52 +29,69 @@
 .label {
   font-size: 11px;
   font-weight: 800;
-  color: #94a3b8;
+  color: #737373;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
+  margin-left: 4px;
 }
 
 .input {
-  background-color: #f8fafc;
-  border: 1px solid #ebf0f9;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 14px 18px;
   border-radius: 12px;
   font-size: 14px;
   font-weight: 600;
-  color: #1e1b4b;
+  color: #ffffff;
   outline: none;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .input:focus {
-  border-color: #4f46e5;
-  background-color: white;
-  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+  border-color: var(--color-primary);
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 0 4px rgba(200, 232, 41, 0.1);
+}
+
+/* Specific styling for select to handle the dark theme dropdown */
+.input option {
+  background-color: #111111;
+  color: white;
 }
 
 .btnSubmit {
   grid-column: span 2;
-  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
-  color: white;
+  background-color: var(--color-primary);
+  color: #111111;
   padding: 16px;
   border-radius: 14px;
   border: none;
   font-size: 14px;
   font-weight: 900;
   cursor: pointer;
-  box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   margin-top: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.btnSubmit:hover {
+.btnSubmit:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 20px 25px -5px rgba(79, 70, 229, 0.3);
+  filter: brightness(1.1);
+  box-shadow: 0 10px 20px -5px rgba(200, 232, 41, 0.3);
 }
 
 .btnSubmit:disabled {
-  opacity: 0.5;
+  opacity: 0.3;
   cursor: not-allowed;
-  transform: none;
-  background-color: #94a3b8;
+  background-color: #737373;
+}
+
+@media (max-width: 768px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  .btnSubmit {
+    grid-column: span 1;
+  }
 }
