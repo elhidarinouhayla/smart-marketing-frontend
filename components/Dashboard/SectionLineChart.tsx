@@ -22,18 +22,22 @@ export default function SectionLineChart({ data }: LineChartProps) {
           <AreaChart data={chartData}>
             <defs>
               <linearGradient id="colorVal" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.1}/>
-                <stop offset="95%" stopColor="#4f46e5" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#c8e829" stopOpacity={0.2}/>
+                <stop offset="95%" stopColor="#c8e829" stopOpacity={0}/>
               </linearGradient>
             </defs>
-            <Tooltip />
+            <Tooltip 
+              contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #ebf0f9', borderRadius: '12px', color: '#111111', fontWeight: 700 }}
+              itemStyle={{ color: '#c8e829' }}
+            />
             <Area 
                type="monotone" 
                dataKey="val" 
-               stroke="#4f46e5" 
-               strokeWidth={3}
+               stroke="#c8e829" 
+               strokeWidth={4}
                fillOpacity={1} 
                fill="url(#colorVal)" 
+               animationDuration={2000}
             />
           </AreaChart>
         </ResponsiveContainer>
