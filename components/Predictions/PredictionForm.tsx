@@ -301,18 +301,43 @@ export default function PredictionForm({ onSuccess }: PredictionFormProps) {
         </button>
 
         {result && (
-          <div className={`${styles.resultCard} ${result.success ? styles.success : styles.failure}`}>
-            <h3 className={styles.resultTitle}>
-              Résultat: {(result.probability * 100).toFixed(1)}% de probabilité
-            </h3>
-            <p className={styles.resultMsg}>{result.message}</p>
-          </div>
+          <>
+            <div className={styles.resultsSummary}>
+              <div className={`${styles.badgeStatus} ${result.success ? styles.successBadge : ''}`}>
+                {result.success ? 'Succès probable' : 'Échec probable'}
+              </div>
+              <p className={styles.summaryText}>{result.message}</p>
+            </div>
+
+            <div className={styles.resultsGrid}>
+              <div className={styles.resultItem}>
+                <span className={styles.itemLabel}>PRÉDICTION</span>
+                <span className={`${styles.itemValue} ${result.success ? styles.successText : styles.fail}`}>
+                  {result.prediction} — {result.success ? 'Succès' : 'Échec'}
+                </span>
+              </div>
+              <div className={styles.resultItem}>
+                <span className={styles.itemLabel}>PROBABILITÉ</span>
+                <span className={styles.itemValue}>
+                  {(result.probability * 100).toFixed(1)}%
+                </span>
+              </div>
+              <div className={styles.resultItem}>
+                <span className={styles.itemLabel}>SUCCÈS</span>
+                <span className={`${styles.itemValue} ${result.success ? styles.successText : styles.fail}`}>
+                  {result.success ? 'Oui' : 'Non'}
+                </span>
+              </div>
+            </div>
+          </>
         )}
 
         {result && !result.success && result.recommendation && (
           <div className={styles.recommendationBox}>
-            <div className={styles.recoBadge}>Généré automatiquement par Gemini AI</div>
-            <h2 className={styles.recoSectionTitle}>Plan de Recommandation IA</h2>
+            <div className={styles.recoHeader}>
+              <h2 className={styles.recoSectionTitle}>Plan de recommandation IA</h2>
+              <span className={styles.recoBadge}>Généré par Gemini AI</span>
+            </div>
             <p className={styles.recoSubtitle}>Votre campagne nécessite des améliorations. Voici les actions recommandées :</p>
             
             <div className={styles.recoList}>
