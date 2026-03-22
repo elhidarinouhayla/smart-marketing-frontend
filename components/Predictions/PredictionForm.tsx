@@ -306,6 +306,20 @@ export default function PredictionForm({ onSuccess }: PredictionFormProps) {
               Résultat: {(result.probability * 100).toFixed(1)}% de probabilité
             </h3>
             <p className={styles.resultMsg}>{result.message}</p>
+            {result.recommendation && (
+              <div className={styles.recommendationBox}>
+                <h4 className={styles.recoTitle}>Conseils Stratégiques :</h4>
+                <ul className={styles.recoList}>
+                  {Array.isArray(result.recommendation) ? (
+                    result.recommendation.map((item: string, idx: number) => (
+                      <li key={idx} className={styles.recoItem}>{item}</li>
+                    ))
+                  ) : (
+                    <div className={styles.recoText}>{result.recommendation}</div>
+                  )}
+                </ul>
+              </div>
+            )}
           </div>
         )}
       </div>
