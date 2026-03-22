@@ -306,20 +306,23 @@ export default function PredictionForm({ onSuccess }: PredictionFormProps) {
               Résultat: {(result.probability * 100).toFixed(1)}% de probabilité
             </h3>
             <p className={styles.resultMsg}>{result.message}</p>
-            {result.recommendation && (
-              <div className={styles.recommendationBox}>
-                <h4 className={styles.recoTitle}>Conseils Stratégiques :</h4>
-                <ul className={styles.recoList}>
-                  {Array.isArray(result.recommendation) ? (
-                    result.recommendation.map((item: string, idx: number) => (
-                      <li key={idx} className={styles.recoItem}>{item}</li>
-                    ))
-                  ) : (
-                    <div className={styles.recoText}>{result.recommendation}</div>
-                  )}
-                </ul>
-              </div>
-            )}
+          </div>
+        )}
+
+        {result && !result.success && result.recommendation && (
+          <div className={styles.recommendationBox}>
+            <div className={styles.recoBadge}>Généré automatiquement par Gemini AI</div>
+            <h2 className={styles.recoSectionTitle}>Plan de Recommandation IA</h2>
+            <p className={styles.recoSubtitle}>Votre campagne nécessite des améliorations. Voici les actions recommandées :</p>
+            
+            <div className={styles.recoList}>
+              {Array.isArray(result.recommendation) && result.recommendation.map((item: string, idx: number) => (
+                <div key={idx} className={styles.recoItem}>
+                  <div className={styles.recoNumber}>{idx + 1}</div>
+                  <p className={styles.recoText}>{item.replace(/^- /, '')}</p>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
