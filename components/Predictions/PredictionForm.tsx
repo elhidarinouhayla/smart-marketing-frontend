@@ -54,8 +54,31 @@ export default function PredictionForm({ onSuccess }: PredictionFormProps) {
     setLoading(true);
     setResult(null);
     try {
+      // 1. Lancer la prédiction brute
       const response = await api.post('predictions/', formData);
-      setResult(response.data);
+      const predictionData = response.data;
+      
+      // 2. Si échec, générer le plan via l'endpoint dédié
+      let recommendation = null;
+      if (!predictionData.success) {
+        try {
+          const planResponse = await api.post('predictions/generate-plan', formData);
+          if (planResponse.data.advice_text) {
+             // Transformer le texte en liste pour le composant
+             recommendation = planResponse.data.advice_text
+               .split('\n')
+               .filter((line: string) => line.trim().length > 0);
+          }
+        } catch (planErr) {
+          console.error('Erreur lors de la génération du plan IA:', planErr);
+        }
+      }
+
+      setResult({
+        ...predictionData,
+        recommendation
+      });
+      
       onSuccess();
     } catch (err) {
       console.error('Error running prediction:', err);
