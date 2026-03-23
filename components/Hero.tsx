@@ -6,7 +6,7 @@ import { Play } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative pt-20 pb-24 md:pt-32 md:pb-40 overflow-hidden bg-[#0a0a0a]">
+    <section className="relative pt-20 pb-24 md:pt-32 md:pb-40 overflow-hidden bg-transparent">
       {/* Dynamic Background Grid */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03] bg-[radial-gradient(#c8e829_1px,transparent_1px)] [background-size:32px_32px]"></div>
       

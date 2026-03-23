@@ -25,7 +25,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section id="case-studies" className="py-24 bg-[#0a0a0a] overflow-hidden relative">
+    <section id="case-studies" className="py-24 bg-transparent overflow-hidden relative">
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/[0.02] skew-x-[-12deg] -z-0"></div>
 

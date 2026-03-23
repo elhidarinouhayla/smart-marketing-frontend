@@ -29,7 +29,7 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="features" className="py-24 bg-[#0a0a0a] relative overflow-hidden">
+    <section id="features" className="py-24 bg-transparent relative overflow-hidden">
       {/* Background Decor */}
       <div className="absolute top-1/2 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
 

@@ -4,7 +4,7 @@ export default function TrustedBy() {
   const partners = ['Google', 'HubSpot', 'Shopify', 'Meta', 'Salesforce'];
 
   return (
-    <section className="py-20 bg-[#0a0a0a] border-y border-white/5">
+    <section className="py-20 bg-transparent border-y border-white/5">
       <div className="container mx-auto px-6">
         <p className="text-center text-[10px] font-black text-[#737373] uppercase tracking-[0.4em] mb-12">
           Propelling 800+ high-growth marketing teams
