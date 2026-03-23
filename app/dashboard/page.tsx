@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Header from '@/components/Dashboard/Header';
-import { Target, Users } from 'lucide-react';
+
 import StatCard from '@/components/Dashboard/StatCard';
 import SectionLineChart from '@/components/Dashboard/SectionLineChart';
 import SectionBarChart from '@/components/Dashboard/SectionBarChart';
@@ -127,19 +127,17 @@ export default function Dashboard() {
           <StatCard 
             label="Active Now" 
             value={overview.active_campaigns} 
-            icon={<div style={{ width: '40px', height: '40px', background: 'rgba(200, 232, 41, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ width: '12px', height: '12px', background: '#c8e829', borderRadius: '50%', boxShadow: '0 0 15px #c8e829' }} />
-            </div>}
+            icon="/icons/active_now.png"
           />
           <StatCard 
             label="Success Probability" 
             value={`${((overview.avg_predicted_rate || 0) * 100).toFixed(1)}%`} 
-            icon={<Target size={32} color="#c8e829" strokeWidth={2.5} />}
+            icon="/icons/success_probability.png"
           />
           <StatCard 
             label="Total Customers" 
             value={overview.total_customers.toLocaleString()} 
-            icon={<Users size={32} color="#c8e829" strokeWidth={2.5} />}
+            icon="/icons/total_customers.png"
           />
         </div>
 

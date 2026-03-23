@@ -19,7 +19,7 @@
 .title {
   font-size: 28px;
   font-weight: 900;
-  color: #1e1b4b;
+  color: #0f172a;
   margin: 0;
   letter-spacing: -0.02em;
 }
@@ -32,8 +32,8 @@
 }
 
 .btnCreate {
-  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
-  color: white;
+  background: linear-gradient(135deg, #c8e829 0%, #c8e829 100%);
+  color: #000000;
   padding: 14px 24px;
   border-radius: 16px;
   border: none;
@@ -43,17 +43,17 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.25);
+  box-shadow: 0 10px 15px -3px rgba(200, 232, 41, 0.25);
   transition: all 0.2s ease;
 }
 
 .btnCreate:hover {
   transform: translateY(-2px);
-  box-shadow: 0 20px 25px -5px rgba(79, 70, 229, 0.25);
+  box-shadow: 0 20px 25px -5px rgba(200, 232, 41, 0.25);
 }
 
 .card {
-  background-color: white;
+  background-color: #000000;
   border-radius: 24px;
   border: 1px solid #ebf0f9;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
@@ -87,7 +87,7 @@
 }
 
 .nameCol {
-  color: #1e1b4b;
+  color: #0f172a;
   font-weight: 900;
 }
 
@@ -100,9 +100,20 @@
   text-transform: uppercase;
 }
 
-.active { background-color: #ecfdf5; color: #10b981; }
-.paused { background-color: #fff7ed; color: #f97316; }
-.inactive { background-color: #fef2f2; color: #ef4444; }
+.active {
+  background-color: #ecfdf5;
+  color: #10b981;
+}
+
+.paused {
+  background-color: #fff7ed;
+  color: #f97316;
+}
+
+.inactive {
+  background-color: #fef2f2;
+  color: #ef4444;
+}
 
 .actions {
   display: flex;
@@ -121,7 +132,7 @@
 
 .actionBtn:hover {
   background-color: #ebf0f9;
-  color: #4f46e5;
+  color: #c8e829;
 }
 
 .deleteBtn:hover {
@@ -161,19 +172,19 @@
   border-radius: 16px;
   font-size: 15px;
   font-weight: 700;
-  color: #1e1b4b;
+  color: #0f172a;
   outline: none;
 }
 
 .input:focus {
-  border-color: #4f46e5;
-  background-color: white;
-  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+  border-color: #c8e829;
+  background-color: #000000;
+  box-shadow: 0 0 0 4px rgba(200, 232, 41, 0.12);
 }
 
 .submitBtn {
-  background-color: #4f46e5;
-  color: white;
+  background-color: #c8e829;
+  color: #000000;
   padding: 18px;
   border-radius: 18px;
   border: none;
@@ -185,6 +196,6 @@
 }
 
 .submitBtn:hover {
-  background-color: #4338ca;
+  background-color: #b5d420;
   transform: translateY(-2px);
 }
