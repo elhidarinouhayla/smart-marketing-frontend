@@ -36,7 +36,7 @@ Welcome to the **Smart Marketing Assistant** frontend! A modern, data-driven das
 
 1.  **Clone the repository**:
     ```bash
-    git clone <your-repo-url>
+    git clone https://github.com/elhidarinouhayla/smart-marketing-frontend.git
     cd smart-marketing-frontend
     ```
 
@@ -88,5 +88,3 @@ The frontend uses **JWT** stored in `localStorage` for session management.
 
 ---
 
-##  License
-This project is licensed under the MIT License.
