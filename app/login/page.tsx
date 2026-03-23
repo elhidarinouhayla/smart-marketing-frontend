@@ -34,7 +34,6 @@ export default function LoginPage() {
       localStorage.setItem('auth_user', username);
       router.push('/dashboard');
     } catch (err: any) {
-      console.error('Login error:', err);
       let errorMsg = 'The username or password you entered is incorrect.';
       if (err.detail) {
         errorMsg = typeof err.detail === 'string' 

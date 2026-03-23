@@ -56,9 +56,9 @@ export default function SectionSegmentChart({ data }: SegmentChartProps) {
             <PieChart>
               <Pie
                 data={chartData}
-                innerRadius={0}
-                outerRadius={65}
-                paddingAngle={0}
+                innerRadius={50}
+                outerRadius={70}
+                paddingAngle={5}
                 dataKey="value"
               >
                 {chartData.map((entry) => (

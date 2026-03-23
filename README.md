@@ -1,10 +1,10 @@
-# 🎨 Smart Marketing - Dashboard Frontend
+#  Smart Marketing - Dashboard Frontend
 
 Welcome to the **Smart Marketing Assistant** frontend! A modern, data-driven dashboard built with **Next.js 15+** and **TypeScript**, designed to visualize marketing analytics, predictions, and recommendations.
 
 ---
 
-## ✨ Features
+##  Features
 
 - **Marketing Dashboard**: Real-time stats on campaigns and customers.
 - **AI Predictions**: Success probability visualization for marketing campaigns.
@@ -25,7 +25,7 @@ Welcome to the **Smart Marketing Assistant** frontend! A modern, data-driven das
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -70,7 +70,7 @@ NEXT_PUBLIC_API_URL=http://localhost:8001/api/
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 - `app/`: Next.js App Router (Pages: `/dashboard`, `/campaigns`, `/login`, etc.)
 - `components/`: Reusable UI components (Charts, StatCards, Layouts).
@@ -80,7 +80,7 @@ NEXT_PUBLIC_API_URL=http://localhost:8001/api/
 
 ---
 
-## 🔐 Authentication Flow
+##  Authentication Flow
 
 The frontend uses **JWT** stored in `localStorage` for session management.
 - Tokens are automatically included in Axios headers via a request interceptor.
@@ -88,5 +88,5 @@ The frontend uses **JWT** stored in `localStorage` for session management.
 
 ---
 
-## 📄 License
+##  License
 This project is licensed under the MIT License.
