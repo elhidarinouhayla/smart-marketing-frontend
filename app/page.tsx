@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0a0a0a]">
+    <main className="min-h-screen" style={{ background: 'linear-gradient(135deg, #2a2a2a 0%, #000000 100%)' }}>
       <Navbar />
       <Hero />
       <TrustedBy />
