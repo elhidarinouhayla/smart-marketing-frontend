@@ -33,10 +33,10 @@ export default function Header() {
         <div className={styles.searchBar}>
           <span className={styles.searchIcon}>🔍</span>
           <input type="text" placeholder="Search..." className={styles.searchInput} />
-          <span className={styles.searchHint}>⌘ K</span>
+
         </div>
         <div className={styles.profileInfo}>
-          <div className={styles.notificationIcon}>🔔</div>
+
           <div className={styles.avatar}>{getInitials(username)}</div>
         </div>
       </div>
