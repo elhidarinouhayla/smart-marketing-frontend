@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { Target, Users, Activity, Megaphone } from 'lucide-react';
 import Header from '@/components/Dashboard/Header';
 
 import StatCard from '@/components/Dashboard/StatCard';
@@ -122,22 +123,22 @@ export default function Dashboard() {
           <StatCard 
             label="Total Campaigns" 
             value={overview.total_campaigns} 
-            icon="/icons/total_campaigns.png"
+            icon={<Megaphone size={28} color="#ffffff" style={{ filter: 'drop-shadow(0 0 6px #c8e829)' }} />}
           />
           <StatCard 
             label="Active Now" 
             value={overview.active_campaigns} 
-            icon="/icons/active_now.png"
+            icon={<Activity size={28} color="#ffffff" style={{ filter: 'drop-shadow(0 0 6px #c8e829)' }} />}
           />
           <StatCard 
             label="Success Probability" 
             value={`${((overview.avg_predicted_rate || 0) * 100).toFixed(1)}%`} 
-            icon="/icons/success_probability.png"
+            icon={<Target size={28} color="#ffffff" style={{ filter: 'drop-shadow(0 0 6px #c8e829)' }} />}
           />
           <StatCard 
             label="Total Customers" 
             value={overview.total_customers.toLocaleString()} 
-            icon="/icons/total_customers.png"
+            icon={<Users size={28} color="#ffffff" style={{ filter: 'drop-shadow(0 0 6px #c8e829)' }} />}
           />
         </div>
 
