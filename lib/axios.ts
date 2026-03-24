@@ -29,15 +29,22 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Return a regular error object if the response exists
+    // Log the error for better debugging
     if (error.response) {
+      console.error(`[API Error] ${error.config?.method?.toUpperCase()} ${error.config?.url} | Status: ${error.response.status}`, error.response.data);
+      
       if (error.response.status === 401) {
         if (typeof window !== 'undefined') {
+          console.warn('[API Auth] 401 Unauthorized - clearing token and redirecting to login');
           localStorage.removeItem('auth_token');
           window.location.href = '/login';
         }
       }
       return Promise.reject(error.response.data);
+    } else if (error.request) {
+      console.error(`[API Network Error] ${error.config?.method?.toUpperCase()} ${error.config?.url} | No response received`, error.message);
+    } else {
+      console.error('[API Setup Error]', error.message);
     }
     return Promise.reject(error);
   }

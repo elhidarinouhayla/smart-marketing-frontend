@@ -11,6 +11,12 @@ import SectionSegmentChart from '@/components/Dashboard/SectionSegmentChart';
 import Recommendations from '@/components/Dashboard/Recommendations';
 import api from '@/lib/axios';
 import styles from './Dashboard.module.css';
+import { 
+  BarChart3, 
+  Activity, 
+  TrendingUp, 
+  Users 
+} from 'lucide-react';
 
 interface DashboardData {
   overview: {
@@ -122,22 +128,22 @@ export default function Dashboard() {
           <StatCard 
             label="Total Campaigns" 
             value={overview.total_campaigns} 
-            icon="/icons/total_campaigns.png"
+            icon={<BarChart3 size={20} />}
           />
           <StatCard 
             label="Active Now" 
             value={overview.active_campaigns} 
-            icon="/icons/active_now.png"
+            icon={<Activity size={20} />}
           />
           <StatCard 
             label="Success Probability" 
             value={`${((overview.avg_predicted_rate || 0) * 100).toFixed(1)}%`} 
-            icon="/icons/success_probability.png"
+            icon={<TrendingUp size={20} />}
           />
           <StatCard 
             label="Total Customers" 
             value={overview.total_customers.toLocaleString()} 
-            icon="/icons/total_customers.png"
+            icon={<Users size={20} />}
           />
         </div>
 

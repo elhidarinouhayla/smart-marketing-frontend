@@ -14,9 +14,9 @@ interface StatCardProps {
 export default function StatCard({ label, value, trend, trendUp, icon }: StatCardProps) {
   const renderIcon = () => {
     if (typeof icon === 'string' && (icon.startsWith('/') || icon.startsWith('http') || icon.includes('.png') || icon.includes('.jpg'))) {
-      return <img src={icon} alt={label} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />;
+      return <img src={icon} alt={label} className={styles.iconImage} />;
     }
-    return icon || '📊';
+    return icon || <div className={styles.dot} />;
   };
 
   return (

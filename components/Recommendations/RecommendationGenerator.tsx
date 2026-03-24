@@ -102,7 +102,7 @@ export default function RecommendationGenerator({ onSuccess }: RecommendationGen
 
         {result && (
           <div className={styles.resultCard}>
-            <h3 className={styles.resultTitle}>Conseils Stratégiques Gémini :</h3>
+            <h3 className={styles.resultTitle}>Conseil Stratégique</h3>
             <p className={styles.advice}>{result.advice_text}</p>
           </div>
         )}

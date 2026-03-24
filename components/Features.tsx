@@ -10,20 +10,20 @@ const features = [
   {
     title: 'Predictive Analytics',
     description: 'Forecast campaign results before launch with machine learning that analyzes historical data and market trends.',
-    icon: BarChart3,
-    color: 'bg-primary/10 text-primary',
+    iconPath: '/features/predictive.png',
+    color: 'bg-primary/10',
   },
   {
     title: 'Unified Data Hub',
     description: 'Connect all your marketing channels in one place. Say goodbye to fragmented data and hello to a single source of truth.',
-    icon: Database,
-    color: 'bg-blue-500/10 text-blue-400',
+    iconPath: '/features/unified.png',
+    color: 'bg-blue-500/10',
   },
   {
     title: 'Smart Recommendations',
     description: 'AI-driven action suggestions to boost performance. Get real-time advice on budget allocation and creative optimization.',
-    icon: Sparkles,
-    color: 'bg-purple-500/10 text-purple-400',
+    iconPath: '/features/smart.png',
+    color: 'bg-purple-500/10',
   },
 ];
 
@@ -48,8 +48,8 @@ export default function Features() {
               className="p-10 rounded-[2.5rem] bg-[#111111] border border-white/5 hover:border-primary/20 transition-all group relative overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className={`w-16 h-16 rounded-2xl ${feature.color} flex items-center justify-center mb-8 relative z-10 shadow-lg`}>
-                <feature.icon size={32} strokeWidth={2.5} />
+              <div className={`w-16 h-16 rounded-2xl ${feature.color} flex items-center justify-center mb-8 relative z-10 shadow-lg overflow-hidden border border-white/10`}>
+                <img src={feature.iconPath} alt={feature.title} className="w-full h-full object-cover" />
               </div>
               <h4 className="text-2xl font-black text-white mb-4 relative z-10">{feature.title}</h4>
               <p className="text-[#9ca3af] leading-relaxed font-medium relative z-10">{feature.description}</p>
